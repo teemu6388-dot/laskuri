@@ -453,30 +453,78 @@ const UI = {
 
     },
 
+showParticipantDialog(participant = null) {
 
+    const editing = participant !== null;
 
-    showParticipantDialog(participant = null) {
+    const name = prompt(
+        "Osallistujan nimi",
+        editing ? participant.name : ""
+    );
 
-        const editing = participant !== null;
+    if (!name) return;
 
-        const name = prompt(
-            "Osallistujan nimi",
-            editing ? participant.name : ""
+    let person = editing
+        ? participant
+        : new Participant(name);
+
+    person.setName(name);
+
+    // Harrastukset
+
+    App.project.activities.forEach(activity => {
+
+        const selected = confirm(
+            `Osallistuuko "${name}" harrastukseen:\n\n${activity.name}?`
         );
 
-        if (name === null || name.trim() === "") return;
+        if (selected) {
 
-        if (editing) {
+            person.addActivity(activity.id);
 
-            participant.setName(name);
+        } else {
 
-            App.save();
-
-            this.render();
-
-            return;
+            person.removeActivity(activity.id);
 
         }
+
+    });
+
+    // Autot
+
+    App.project.vehicles.forEach(vehicle => {
+
+        const selected = confirm(
+            `Osallistuuko "${name}" auton "${vehicle.name}" kuluihin?`
+        );
+
+        if (selected) {
+
+            person.addVehicle(vehicle.id);
+
+        } else {
+
+            person.removeVehicle(vehicle.id);
+
+        }
+
+    });
+
+    if (!editing) {
+
+        App.addParticipant(person);
+
+    } else {
+
+        App.save();
+
+        this.render();
+
+    }
+
+},
+
+   
 
         App.addParticipant(
 
@@ -488,3 +536,43 @@ const UI = {
             App.project.getGrandTotal().toFixed(2) + " €";
 
     },
+
+createActivitiesChecklist(participant) {
+
+    return App.project.activities.map(activity => `
+
+        <label class="checkbox-row">
+
+            <input
+                type="checkbox"
+                value="${activity.id}"
+                ${participant.hasActivity(activity.id) ? "checked" : ""}
+            >
+
+            ${activity.name}
+
+        </label>
+
+    `).join("");
+
+},
+
+createVehiclesChecklist(participant) {
+
+    return App.project.vehicles.map(vehicle => `
+
+        <label class="checkbox-row">
+
+            <input
+                type="checkbox"
+                value="${vehicle.id}"
+                ${participant.hasVehicle(vehicle.id) ? "checked" : ""}
+            >
+
+            ${vehicle.name}
+
+        </label>
+
+    `).join("");
+
+},
