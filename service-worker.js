@@ -72,7 +72,7 @@ self.addEventListener("fetch", event => {
 
             .then(response => {
 
-                return response || fetch(event.request);
+                return response || fetch(event.request).catch(() => response);
 
             })
 
