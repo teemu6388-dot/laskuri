@@ -997,3 +997,25 @@ body{
     padding-bottom:90px;
 
 }
+
+.checkbox-row{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    padding:10px 0;
+
+    cursor:pointer;
+
+}
+
+.checkbox-row input{
+
+    width:20px;
+
+    height:20px;
+
+}
