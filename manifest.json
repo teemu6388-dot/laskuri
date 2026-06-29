@@ -1,7 +1,7 @@
 {
   "name": "Laskurit",
   "short_name": "Laskurit",
-  "description": "Harrastusten ja autojen kulujen jakaminen osallistujille",
+  "description": "Aktiviteettien ja autojen kulujen jakaminen osallistujille",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
