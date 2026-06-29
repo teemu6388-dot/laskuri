@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="fi">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Laskurit v3.0.0</title>
+
+    <meta name="theme-color" content="#007AFF">
+
+    <link rel="manifest" href="manifest.json">
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/theme.css">
+    <link rel="stylesheet" href="css/ios.css">
+
+</head>
+
+<body>
+
+<header class="topbar">
+
+    <div class="logo">
+
+        <span class="logo-icon">💶</span>
+
+        <div>
+
+            <h1>Laskurit</h1>
+
+            <small>v3.0.0 Alpha</small>
+
+        </div>
+
+    </div>
+
+    <button id="themeToggle"
+            class="icon-button"
+            title="Tumma tila">
+
+        🌙
+
+    </button>
+
+</header>
+
+<main class="container">
+
+    <!-- HARRASTUKSET -->
+
+    <section class="card">
+
+        <div class="card-header">
+
+            <h2>🎯 Harrastukset</h2>
+
+            <button id="addActivityBtn"
+                    class="primary-button">
+
+                + Lisää
+
+            </button>
+
+        </div>
+
+        <div id="activitiesList">
+
+            <div class="empty-state">
+
+                Ei harrastuksia.
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- AUTOT -->
+
+    <section class="card">
+
+        <div class="card-header">
+
+            <h2>🚗 Autot</h2>
+
+            <button id="addVehicleBtn"
+                    class="primary-button">
+
+                + Lisää
+
+            </button>
+
+        </div>
+
+        <div id="vehiclesList">
+
+            <div class="empty-state">
+
+                Ei autoja.
+
+            </div>
+
+        </div>
+
+    </section>
+
+      <!-- OSALLISTUJAT -->
+
+    <section class="card">
+
+        <div class="card-header">
+
+            <h2>👥 Osallistujat</h2>
+
+            <button id="addParticipantBtn"
+                    class="primary-button">
+
+                + Lisää
+
+            </button>
+
+        </div>
+
+        <div id="participantsList">
+
+            <div class="empty-state">
+
+                Ei osallistujia.
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- YHTEENVETO -->
+
+    <section class="card">
+
+        <div class="card-header">
+
+            <h2>💰 Yhteenveto</h2>
+
+        </div>
+
+        <div id="summaryCard">
+
+            <div class="summary-row">
+
+                <span>Harrastukset</span>
+
+                <strong id="activitiesTotal">
+                    0,00 €
+                </strong>
+
+            </div>
+
+            <div class="summary-row">
+
+                <span>Autot</span>
+
+                <strong id="vehiclesTotal">
+                    0,00 €
+                </strong>
+
+            </div>
+
+            <hr>
+
+            <div class="summary-row total">
+
+                <span>Kokonaissumma</span>
+
+                <strong id="grandTotal">
+                    0,00 €
+                </strong>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- MUISTIINPANOT -->
+
+    <section class="card">
+
+        <div class="card-header">
+
+            <h2>📝 Muistiinpanot</h2>
+
+        </div>
+
+        <textarea id="notes"
+                  rows="8"
+                  placeholder="Kirjoita muistiinpanot tähän..."></textarea>
+
+    </section>
+
+
+    <!-- LB -> KG -->
+
+    <section class="card">
+
+        <div class="card-header">
+
+            <h2>⚖️ lb → kg</h2>
+
+        </div>
+
+        <label for="lbInput">
+
+            Paino (lb)
+
+        </label>
+
+        <input id="lbInput"
+               type="number"
+               step="0.01"
+               placeholder="0">
+
+        <div id="kgResult"
+             class="result-box">
+
+            0.00 kg
+
+        </div>
+
+    </section>
+
+      <!-- Floating Action Button -->
+
+    <button id="fabButton"
+            class="fab"
+            title="Lisää">
+
+        +
+
+    </button>
+
+</main>
+
+
+<!-- Bottom Sheet -->
+
+<div id="bottomSheet"
+     class="bottom-sheet hidden">
+
+    <div class="sheet">
+
+        <div class="sheet-handle"></div>
+
+        <div id="sheetContent">
+
+            <!-- ui.js rakentaa lomakkeet tähän -->
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- Toast -->
+
+<div id="toast"
+     class="toast hidden">
+
+    Tallennettu
+
+</div>
+
+
+<!-- Overlay -->
+
+<div id="overlay"
+     class="overlay hidden"></div>
+
+
+<!-- JavaScript -->
+
+<script src="js/models/project.js"></script>
+<script src="js/models/activity.js"></script>
+<script src="js/models/vehicle.js"></script>
+<script src="js/models/participant.js"></script>
+
+<script src="js/storage.js"></script>
+<script src="js/theme.js"></script>
+<script src="js/app.js"></script>
+<script src="js/ui.js"></script>
+
+
+<!-- Service Worker -->
+
+<script>
+
+if ("serviceWorker" in navigator) {
+
+    window.addEventListener("load", () => {
+
+        navigator.serviceWorker.register("service-worker.js")
+
+            .then(() => {
+
+                console.log("Service Worker rekisteröity.");
+
+            })
+
+            .catch(error => {
+
+                console.error(error);
+
+            });
+
+    });
+
+}
+
+</script>
+
+</body>
+</html>
