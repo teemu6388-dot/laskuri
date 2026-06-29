@@ -19,7 +19,7 @@ const UI = {
 
             container.innerHTML = `
                 <div class="empty-state">
-                    Ei harrastuksia lisättynä.
+                    Ei aktiviteetteja lisättynä.
                 </div>
             `;
 
@@ -294,7 +294,7 @@ const UI = {
 
                     <h3>${participant.name}</h3>
 
-                    <p>Harrastuksia:
+                    <p>Aktiviteetteja:
                         <strong>${participant.activities.length}</strong>
                     </p>
 
@@ -505,7 +505,7 @@ const UI = {
 
         this.openSheet(
 
-            editing ? "Muokkaa harrastusta" : "Lisää harrastus",
+            editing ? "Muokkaa aktiviteettia" : "Lisää aktiviteetti",
 
             `
             <label>Nimi</label>
@@ -531,7 +531,7 @@ const UI = {
 
                 if (!name) {
 
-                    this.toast("Anna harrastuksen nimi");
+                    this.toast("Anna aktiviteetin nimi");
 
                     return;
 
@@ -572,7 +572,7 @@ const UI = {
 
                 this.render();
 
-                this.toast("Harrastus tallennettu");
+                this.toast("Aktiviteetti tallennettu");
 
             }
 
